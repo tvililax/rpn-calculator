@@ -9,6 +9,7 @@ class Calculator extends Component {
             numberDisplay : '',
             piles: [],
             result: 0,
+            displayResult: '',
         }
     }
 
@@ -25,14 +26,19 @@ class Calculator extends Component {
                 <button onClick={() => this.displaySelection(7)}> 7 </button> 
                 <button onClick={() => this.displaySelection(8)}> 8 </button> 
                 <button onClick={() => this.displaySelection(9)}> 9 </button> <br/>
-                <button onClick={() => this.plusOperator(this.state.numberDisplay)}> + </button> 
-                <button onClick={() => this.minusOperator()}> - </button> 
-                <button onClick={() => this.multipleOperator()}> * </button> <br/>
 
-                <button onClick={() => this.pushList(this.state.numberDisplay)}>Entrer</button>
+                <button onClick={() => this.plusOperator(parseInt(this.state.numberDisplay))}> + </button> 
+                <button onClick={() => this.minusOperator(parseInt(this.state.numberDisplay))}> - </button> 
+                <button onClick={() => this.multipleOperator(parseInt(this.state.numberDisplay))}> * </button>
+                <button onClick={() => this.multipleOperator()}> % </button> <br/>
+
+                <button onClick={() => this.pushList(this.state.numberDisplay)}>ENTER</button>
+                <button onClick={this.pileDrop}>DROP</button>
+                <button>SWAP</button>
+                <button onClick={this.clearAll}>CLEAR ALL</button>
 
                 <p> {this.state.numberDisplay} </p>
-                <p> {this.state.result} </p>
+                <p> Résultat : {this.state.displayResult} </p>
 
             </div>
         )
@@ -46,6 +52,28 @@ class Calculator extends Component {
         }))
 
     }
+
+    // fonction drop, qui supprime le dernier élément du tableau
+    pileDrop = () => {
+
+        console.log(this.state.piles);
+        this.setState(() => ({
+            piles: this.state.piles.pop()
+        }))
+        console.log(this.state.piles)
+    }
+
+    // fonction qui reset tout
+    clearAll = () => {
+
+        this.setState(() => ({
+                numberDisplay : '',
+                piles: [],
+                result: 0,
+                displayResult: '',
+        }))
+    }
+
 
     // fonction qui permet de pousser un bouton cliqué dans une pile
     pushList = (pile) => {
@@ -61,40 +89,56 @@ class Calculator extends Component {
         console.log(this.state.piles);
     }
 
-    // fonction qui permet d'additionner le nombre entré, avec celui/ceux déjà dans la pile
+    // fonction qui permet d'additionner le nombre entré, avec celui déjà dans la pile
     plusOperator = (num) => {
 
-        console.log("on va additionner "+this.state.piles+" avec "+num);
-
-        for (let i=0; i<this.state.piles.length;i++){
-            this.state.result += parseInt(this.state.piles[i])
-        }
-
-        this.state.result += parseInt(num);
+        console.log("on va additionner "+this.state.piles[this.state.piles.length-1]+" avec "+num);
+        
+        this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) + parseInt(num);
+        
         console.log("resultat : "+this.state.result)
 
         this.setState(() => ({
-            result: this.state.result,
-            numberDisplay: ''
+            result: null,
+            numberDisplay: null,
+            piles: [this.state.result],
+            displayResult: this.state.result,
         }))
 
     }
 
-    // fonction qui permet de soustraire le nombre déjà dans la pile par celui entré
-    plusOperator = (num) => {
+    // fonction qui permet de multiplier le nombre entré, avec celui déjà dans la pile
+    multipleOperator = (num) => {
 
-        console.log("on va additionner "+this.state.piles+" avec "+num);
-
-        for (let i=0; i<this.state.piles.length;i++){
-            this.state.result += parseInt(this.state.piles[i])
-        }
-
-        this.state.result += parseInt(num);
+        console.log("on va multiplier "+this.state.piles[this.state.piles.length-1]+" avec "+num);
+        
+        this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) * parseInt(num);
+        
         console.log("resultat : "+this.state.result)
 
         this.setState(() => ({
-            result: this.state.result,
-            numberDisplay: ''
+            result: null,
+            numberDisplay: null,
+            piles: [this.state.result],
+            displayResult: this.state.result,
+        }))
+
+    }
+
+    // fonction qui permet de soustraire le dernier nombre dans la pile, par le nombre entré
+    minusOperator = (num) => {
+
+        console.log("on va soustraire "+this.state.piles[this.state.piles.length-1]+" avec "+num);
+        
+        this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) - parseInt(num);
+        
+        console.log("resultat : "+this.state.result)
+
+        this.setState(() => ({
+            result: null,
+            numberDisplay: null,
+            piles: [this.state.result],
+            displayResult: this.state.result,
         }))
 
     }
