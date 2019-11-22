@@ -30,11 +30,12 @@ class Calculator extends Component {
                 <button onClick={() => this.plusOperator(parseInt(this.state.numberDisplay))}> + </button> 
                 <button onClick={() => this.minusOperator(parseInt(this.state.numberDisplay))}> - </button> 
                 <button onClick={() => this.multipleOperator(parseInt(this.state.numberDisplay))}> * </button>
-                <button onClick={() => this.multipleOperator()}> % </button> <br/>
+                <button onClick={() => this.divideOperator(parseInt(this.state.numberDisplay))}> % </button> <br/>
 
                 <button onClick={() => this.pushList(this.state.numberDisplay)}>ENTER</button>
+                <button onClick={this.changeSign}>+ / -</button>
                 <button onClick={this.pileDrop}>DROP</button>
-                <button>SWAP</button>
+                <button onClick={this.pileSwap}>SWAP</button>
                 <button onClick={this.clearAll}>CLEAR ALL</button>
 
                 <p> {this.state.numberDisplay} </p>
@@ -53,14 +54,38 @@ class Calculator extends Component {
 
     }
 
+    // fonction qui change le signe du nombre entré
+    changeSign = () => {
+
+        this.setState((prevState) => ({
+            numberDisplay: prevState.numberDisplay * -1
+        }))
+
+    }
+
     // fonction drop, qui supprime le dernier élément du tableau
     pileDrop = () => {
-
-        console.log(this.state.piles);
+        console.log('avant le drop : '+this.state.piles);
+        this.state.piles.splice(this.state.piles.length-1, 1);
         this.setState(() => ({
-            piles: this.state.piles.pop()
+            piles: this.state.piles
         }))
-        console.log(this.state.piles)
+        console.log('après le drop : '+this.state.piles);
+    }
+
+    // fonction drop, qui supprime le dernier élément du tableau
+    pileSwap = () => {
+        console.log('avant le swap : '+this.state.piles);
+        
+        let tmp = this.state.piles[this.state.piles.length-1];
+        this.state.piles[this.state.piles.length-1] = this.state.piles[this.state.piles.length-2];
+        this.state.piles[this.state.piles.length-2] = tmp;
+
+        this.setState(() => ({
+            piles: this.state.piles
+        }))
+        
+        console.log('après le swap : '+this.state.piles);
     }
 
     // fonction qui reset tout
@@ -131,6 +156,24 @@ class Calculator extends Component {
         console.log("on va soustraire "+this.state.piles[this.state.piles.length-1]+" avec "+num);
         
         this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) - parseInt(num);
+        
+        console.log("resultat : "+this.state.result)
+
+        this.setState(() => ({
+            result: null,
+            numberDisplay: null,
+            piles: [this.state.result],
+            displayResult: this.state.result,
+        }))
+
+    }
+
+    // fonction qui permet de diviser le dernier nombre dans la pile, par le nombre entré
+    divideOperator = (num) => {
+
+        console.log("on va diviser "+this.state.piles[this.state.piles.length-1]+" avec "+num);
+        
+        this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) / parseInt(num);
         
         console.log("resultat : "+this.state.result)
 
