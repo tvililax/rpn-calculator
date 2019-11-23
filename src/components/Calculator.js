@@ -15,47 +15,50 @@ class Calculator extends Component {
 
     render(){
         return (
-            <div id='calculator'>
-                <button className='btnStyle' style={{'width': '100%'}} onClick={() => this.displaySelection(0)}> 0 </button> <br/>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(1)}> 1 </button>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(2)}> 2 </button>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(3)}> 3 </button> <br/>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(4)}> 4 </button> 
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(5)}> 5 </button>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(6)}> 6 </button> <br/>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(7)}> 7 </button> 
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(8)}> 8 </button> 
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(9)}> 9 </button> <br/>
+            <div>
+                <div id='calculator'>
+                    <p className="pileStyle">{this.state.piles[this.state.piles.length-4]}</p>
+                    <p className="pileStyle">{this.state.piles[this.state.piles.length-3]}</p>
+                    <p className="pileStyle">{this.state.piles[this.state.piles.length-2]}</p>
+                    <p className="pileStyle">{this.state.piles[this.state.piles.length-1]}</p>
+                    {this.state.displayResult &&
+                        <p> Résultat : <b>{this.state.displayResult}</b></p>
+                    }
+                    <p className="pileStyle" style={{'text-decoration': 'underline blue'}} > {this.state.numberDisplay} </p>
 
-                <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.plusOperator(parseInt(this.state.numberDisplay))}> + </button> 
-                <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.minusOperator(parseInt(this.state.numberDisplay))}> - </button> 
-                <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.multipleOperator(parseInt(this.state.numberDisplay))}> X </button>
-                <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.divideOperator(parseInt(this.state.numberDisplay))}> % </button> <br/>
+                    <button className='btnStyle' style={{'width': '100%'}} onClick={() => this.displaySelection(0)}> 0 </button> <br/>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(1)}> 1 </button>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(2)}> 2 </button>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(3)}> 3 </button> <br/>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(4)}> 4 </button> 
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(5)}> 5 </button>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(6)}> 6 </button> <br/>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(7)}> 7 </button> 
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(8)}> 8 </button> 
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(9)}> 9 </button> <br/>
 
-                <button className='btnStyle' style={{'width': '100%'}} onClick={() => this.pushList(this.state.numberDisplay)}>ENTER</button><br/>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.changeSign}>+ / -</button>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.pileDrop}>DROP</button>
-                <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.pileSwap}>SWAP</button>
-                <button className='btnStyle' style={{'width': '100%'}} onClick={this.clearAll}>CLEAR ALL</button>
+                    <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.plusOperator(parseInt(this.state.numberDisplay))}> + </button> 
+                    <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.minusOperator(parseInt(this.state.numberDisplay))}> - </button> 
+                    <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.multipleOperator(parseInt(this.state.numberDisplay))}> X </button>
+                    <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.divideOperator(parseInt(this.state.numberDisplay))}> % </button> <br/>
 
-                <p> {this.state.numberDisplay} </p>
-                {this.state.displayResult &&
-                    <p> Résultat : <b>{this.state.displayResult}</b></p>
-                }
-                
-
+                    <button className='btnStyle' style={{'width': '100%'}} onClick={() => this.pushList(this.state.numberDisplay)}>ENTER</button><br/>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.changeSign}>+ / -</button>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.pileDrop}>DROP</button>
+                    <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.pileSwap}>SWAP</button>
+                    <button className='btnStyle' style={{'width': '50%'}} onClick={this.clearDisplay}>C</button>
+                    <button className='btnStyle' style={{'width': '50%'}} onClick={this.clearAll}>AC</button>
+                </div>
             </div>
         )
     }
 
     // fonction qui permet l'affichage en direct à chaque numéro cliqué
     displaySelection = (num) => {
-        console.log(this.state.numberDisplay);
         this.setState((prevState) => ({
             numberDisplay: prevState.numberDisplay+num,
             isOperator: false
         }))
-        console.log(this.state.numberDisplay);
     }
 
     // fonction qui change le signe du nombre entré
@@ -90,6 +93,14 @@ class Calculator extends Component {
         }))
 
         console.log('après le swap : '+this.state.piles);
+    }
+
+    // fonction qui reset le nombre entré
+    clearDisplay = () => {
+
+        this.setState(() => ({
+                numberDisplay : '',
+        }))
     }
 
     // fonction qui reset tout
