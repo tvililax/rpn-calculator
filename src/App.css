@@ -20,3 +20,25 @@
 .App-link {
   color: #09d3ac;
 }
+
+h1{
+  text-align: center;
+}
+.btnStyle{
+  border: none;
+  padding: 10px;
+  margin-bottom: 5px;
+  background: lightblue;
+  font-weight: bold;
+  cursor: pointer;
+  font-size:20px;
+}
+#calculator{
+    width:250px;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid black;
+    box-shadow: 0px 15px 15px 10px #9E9E9E;
+    margin-top: 15px;
+    padding: 20px;
+}

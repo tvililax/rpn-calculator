@@ -14,28 +14,28 @@ class Calculator extends Component {
 
     render(){
         return (
-            <div>
-                <button onClick={() => this.displaySelection(0)}> 0 </button> <br/>
-                <button onClick={() => this.displaySelection(1)}> 1 </button>
-                <button onClick={() => this.displaySelection(2)}> 2 </button>
-                <button onClick={() => this.displaySelection(3)}> 3 </button> <br/>
-                <button onClick={() => this.displaySelection(4)}> 4 </button> 
-                <button onClick={() => this.displaySelection(5)}> 5 </button>
-                <button onClick={() => this.displaySelection(6)}> 6 </button> <br/>
-                <button onClick={() => this.displaySelection(7)}> 7 </button> 
-                <button onClick={() => this.displaySelection(8)}> 8 </button> 
-                <button onClick={() => this.displaySelection(9)}> 9 </button> <br/>
+            <div id='calculator'>
+                <button className='btnStyle' style={{'width': '100%'}} onClick={() => this.displaySelection(0)}> 0 </button> <br/>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(1)}> 1 </button>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(2)}> 2 </button>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(3)}> 3 </button> <br/>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(4)}> 4 </button> 
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(5)}> 5 </button>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(6)}> 6 </button> <br/>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(7)}> 7 </button> 
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(8)}> 8 </button> 
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(9)}> 9 </button> <br/>
 
-                <button onClick={() => this.plusOperator(parseInt(this.state.numberDisplay))}> + </button> 
-                <button onClick={() => this.minusOperator(parseInt(this.state.numberDisplay))}> - </button> 
-                <button onClick={() => this.multipleOperator(parseInt(this.state.numberDisplay))}> * </button>
-                <button onClick={() => this.divideOperator(parseInt(this.state.numberDisplay))}> % </button> <br/>
+                <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.plusOperator(parseInt(this.state.numberDisplay))}> + </button> 
+                <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.minusOperator(parseInt(this.state.numberDisplay))}> - </button> 
+                <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.multipleOperator(parseInt(this.state.numberDisplay))}> * </button>
+                <button className='btnStyle' style={{'width': '25%'}} onClick={() => this.divideOperator(parseInt(this.state.numberDisplay))}> % </button> <br/>
 
-                <button onClick={() => this.pushList(this.state.numberDisplay)}>ENTER</button>
-                <button onClick={this.changeSign}>+ / -</button>
-                <button onClick={this.pileDrop}>DROP</button>
-                <button onClick={this.pileSwap}>SWAP</button>
-                <button onClick={this.clearAll}>CLEAR ALL</button>
+                <button className='btnStyle' style={{'width': '100%'}} onClick={() => this.pushList(this.state.numberDisplay)}>ENTER</button><br/>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.changeSign}>+ / -</button>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.pileDrop}>DROP</button>
+                <button className='btnStyle' style={{'width': '33.33%'}} onClick={this.pileSwap}>SWAP</button>
+                <button className='btnStyle' style={{'width': '100%'}} onClick={this.clearAll}>CLEAR ALL</button>
 
                 <p> {this.state.numberDisplay} </p>
                 <p> Résultat : {this.state.displayResult} </p>
@@ -121,12 +121,13 @@ class Calculator extends Component {
         
         console.log("resultat : "+this.state.result)
 
-        this.setState(() => ({
+        this.setState((prev) => ({
             result: null,
             numberDisplay: "",
-            piles: [this.state.result],
             displayResult: this.state.result,
         }))
+
+        this.state.piles.push(num,this.state.result);
     }
 
     // fonction qui permet de multiplier le nombre entré, avec celui déjà dans la pile
@@ -141,9 +142,10 @@ class Calculator extends Component {
         this.setState(() => ({
             result: null,
             numberDisplay: "",
-            piles: [this.state.result],
             displayResult: this.state.result,
         }))
+
+        this.state.piles.push(num,this.state.result);
 
     }
 
@@ -159,9 +161,10 @@ class Calculator extends Component {
         this.setState(() => ({
             result: null,
             numberDisplay: "",
-            piles: [this.state.result],
             displayResult: this.state.result,
         }))
+
+        this.state.piles.push(num,this.state.result);
 
     }
 
@@ -177,9 +180,10 @@ class Calculator extends Component {
         this.setState(() => ({
             result: null,
             numberDisplay: "",
-            piles: [this.state.result],
             displayResult: this.state.result,
         }))
+
+        this.state.piles.push(num,this.state.result);
 
     }
 

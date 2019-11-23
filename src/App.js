@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   return (
     <div>
+      <h1>Reverse Polish Notation Calculator - React</h1>
       <Calculator/>
     </div>
   );
