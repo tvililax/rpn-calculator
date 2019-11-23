@@ -52,7 +52,8 @@ class Calculator extends Component {
     displaySelection = (num) => {
         console.log(this.state.numberDisplay);
         this.setState((prevState) => ({
-            numberDisplay: prevState.numberDisplay+num
+            numberDisplay: prevState.numberDisplay+num,
+            isOperator: false
         }))
         console.log(this.state.numberDisplay);
     }
@@ -108,8 +109,7 @@ class Calculator extends Component {
 
         this.state.piles.push(pile);
         this.setState(() => ({
-            numberDisplay: '',
-            isOperator: false
+            numberDisplay: ''
         }));
 
         console.log('tableau piles');
@@ -136,41 +136,45 @@ class Calculator extends Component {
             this.state.piles.push(num,this.state.result);
 
         } else {
+            
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) + parseInt(this.state.piles[this.state.piles.length-4]);
+
             this.setState((prevState) => ({
                 result: null,
                 numberDisplay: "",
                 displayResult: prevState.result,
-                isOperator: false
             }))
             this.state.piles.push(this.state.result);
         }
+
     }
 
     // fonction qui permet de multiplier le nombre entré, avec celui déjà dans la pile
     multipleOperator = (num) => {
+
         if(num && !this.state.isOperator){
-                console.log("on va multiplier "+this.state.piles[this.state.piles.length-1]+" avec "+num);
-                
-                this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) * parseInt(num);
-                
-                console.log("resultat : "+this.state.result)
 
-                this.setState(() => ({
-                    result: null,
-                    numberDisplay: "",
-                    displayResult: this.state.result,
-                }))
-
-                this.state.piles.push(num,this.state.result);
+            console.log("on va multiplier "+this.state.piles[this.state.piles.length-1]+" avec "+num);
             
+            this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) * parseInt(num);
+            
+            console.log("resultat : "+this.state.result)
+
+            this.setState(() => ({
+                result: null,
+                numberDisplay: "",
+                displayResult: this.state.result,
+            }))
+
+            this.state.piles.push(num,this.state.result);
+
         } else {
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) * parseInt(this.state.piles[this.state.piles.length-4]);
+
             this.setState((prevState) => ({
                 result: null,
                 numberDisplay: "",
                 displayResult: prevState.result,
-                isOperator: false
             }))
             this.state.piles.push(this.state.result);
         }
@@ -179,36 +183,41 @@ class Calculator extends Component {
 
     // fonction qui permet de soustraire le dernier nombre dans la pile, par le nombre entré
     minusOperator = (num) => {
+
         if(num && !this.state.isOperator){
-                console.log("on va soustraire "+this.state.piles[this.state.piles.length-1]+" avec "+num);
-                
-                this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) - parseInt(num);
-                
-                console.log("resultat : "+this.state.result)
 
-                this.setState(() => ({
-                    result: null,
-                    numberDisplay: "",
-                    displayResult: this.state.result,
-                }))
+            console.log("on va soustraire "+this.state.piles[this.state.piles.length-1]+" avec "+num);
+            
+            this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) - parseInt(num);
+            
+            console.log("resultat : "+this.state.result)
 
-                this.state.piles.push(num,this.state.result);
-            } else {
-                this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) - parseInt(this.state.piles[this.state.piles.length-4]);
-                this.setState((prevState) => ({
-                    result: null,
-                    numberDisplay: "",
-                    displayResult: prevState.result,
-                    isOperator: false
-                }))
-                this.state.piles.push(this.state.result);
-            }
+            this.setState(() => ({
+                result: null,
+                numberDisplay: "",
+                displayResult: this.state.result,
+            }))
+
+            this.state.piles.push(num,this.state.result);
+
+        } else {
+            this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) - parseInt(this.state.piles[this.state.piles.length-4]);
+
+            this.setState((prevState) => ({
+                result: null,
+                numberDisplay: "",
+                displayResult: prevState.result,
+            }))
+            this.state.piles.push(this.state.result);
+        }
 
     }
 
     // fonction qui permet de diviser le dernier nombre dans la pile, par le nombre entré
     divideOperator = (num) => {
+
         if(num && !this.state.isOperator){
+
             console.log("on va diviser "+this.state.piles[this.state.piles.length-1]+" avec "+num);
             
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) / parseInt(num);
@@ -222,17 +231,19 @@ class Calculator extends Component {
             }))
 
             this.state.piles.push(num,this.state.result);
-            } else {
-                this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) / parseInt(this.state.piles[this.state.piles.length-4]);
-                    this.setState((prevState) => ({
-                        result: null,
-                        numberDisplay: "",
-                        displayResult: prevState.result,
-                        isOperator: false
-                }))
-                this.state.piles.push(this.state.result);
-            }
+
+        } else {
+            this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) / parseInt(this.state.piles[this.state.piles.length-4]);
+
+            this.setState((prevState) => ({
+                result: null,
+                numberDisplay: "",
+                displayResult: prevState.result,
+            }))
+            this.state.piles.push(this.state.result);
         }
     }
+
+}
 
 export default Calculator;
