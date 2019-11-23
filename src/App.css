@@ -33,6 +33,11 @@ h1{
   cursor: pointer;
   font-size:20px;
 }
+
+.btnStyle:hover{
+  background: skyblue;
+}
+
 #calculator{
     width:250px;
     margin: 0 auto;
