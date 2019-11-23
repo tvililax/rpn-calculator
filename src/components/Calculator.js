@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class Calculator extends Component {
 
     constructor(props){
@@ -47,11 +46,11 @@ class Calculator extends Component {
 
     // fonction qui permet l'affichage en direct à chaque numéro cliqué
     displaySelection = (num) => {
-
+        console.log(this.state.numberDisplay);
         this.setState((prevState) => ({
             numberDisplay: prevState.numberDisplay+num
         }))
-
+        console.log(this.state.numberDisplay);
     }
 
     // fonction qui change le signe du nombre entré
@@ -84,7 +83,7 @@ class Calculator extends Component {
         this.setState(() => ({
             piles: this.state.piles
         }))
-        
+
         console.log('après le swap : '+this.state.piles);
     }
 
@@ -98,7 +97,6 @@ class Calculator extends Component {
                 displayResult: '',
         }))
     }
-
 
     // fonction qui permet de pousser un bouton cliqué dans une pile
     pushList = (pile) => {
@@ -125,11 +123,10 @@ class Calculator extends Component {
 
         this.setState(() => ({
             result: null,
-            numberDisplay: null,
+            numberDisplay: "",
             piles: [this.state.result],
             displayResult: this.state.result,
         }))
-
     }
 
     // fonction qui permet de multiplier le nombre entré, avec celui déjà dans la pile
@@ -143,7 +140,7 @@ class Calculator extends Component {
 
         this.setState(() => ({
             result: null,
-            numberDisplay: null,
+            numberDisplay: "",
             piles: [this.state.result],
             displayResult: this.state.result,
         }))
@@ -161,7 +158,7 @@ class Calculator extends Component {
 
         this.setState(() => ({
             result: null,
-            numberDisplay: null,
+            numberDisplay: "",
             piles: [this.state.result],
             displayResult: this.state.result,
         }))
@@ -179,7 +176,7 @@ class Calculator extends Component {
 
         this.setState(() => ({
             result: null,
-            numberDisplay: null,
+            numberDisplay: "",
             piles: [this.state.result],
             displayResult: this.state.result,
         }))
