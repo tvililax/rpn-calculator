@@ -146,7 +146,7 @@ class Calculator extends Component {
 
             this.state.piles.push(num,this.state.result);
 
-        } else if(num || this.state.displayResult && this.state.isOperator){
+        } else if((num || this.state.displayResult) && this.state.isOperator){
             
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) + parseInt(this.state.piles[this.state.piles.length-4]);
 
@@ -179,7 +179,7 @@ class Calculator extends Component {
 
             this.state.piles.push(num,this.state.result);
 
-        } else if(num || this.state.displayResult && this.state.isOperator){
+        } else if((num || this.state.displayResult) && this.state.isOperator){
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) * parseInt(this.state.piles[this.state.piles.length-4]);
 
             this.setState((prevState) => ({
@@ -211,7 +211,7 @@ class Calculator extends Component {
 
             this.state.piles.push(num,this.state.result);
 
-        } else if(num || this.state.displayResult && this.state.isOperator){
+        } else if((num || this.state.displayResult) && this.state.isOperator){
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) - parseInt(this.state.piles[this.state.piles.length-4]);
 
             this.setState((prevState) => ({
@@ -243,7 +243,7 @@ class Calculator extends Component {
 
             this.state.piles.push(num,this.state.result);
 
-        } else if(num || this.state.displayResult && this.state.isOperator){
+        } else if((num || this.state.displayResult) && this.state.isOperator){
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) / parseInt(this.state.piles[this.state.piles.length-4]);
 
             this.setState((prevState) => ({
