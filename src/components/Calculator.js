@@ -24,7 +24,7 @@ class Calculator extends Component {
                     {this.state.displayResult &&
                         <p> Résultat : <b>{this.state.displayResult}</b></p>
                     }
-                    <p className="pileStyle" style={{'text-decoration': 'underline blue'}} > {this.state.numberDisplay} </p>
+                    <p className="pileStyle" style={{'textDecoration': 'underline blue'}} > {this.state.numberDisplay} </p>
 
                     <button className='btnStyle' style={{'width': '100%'}} onClick={() => this.displaySelection(0)}> 0 </button> <br/>
                     <button className='btnStyle' style={{'width': '33.33%'}} onClick={() => this.displaySelection(1)}> 1 </button>
@@ -146,7 +146,7 @@ class Calculator extends Component {
 
             this.state.piles.push(num,this.state.result);
 
-        } else {
+        } else if(num || this.state.displayResult && this.state.isOperator){
             
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) + parseInt(this.state.piles[this.state.piles.length-4]);
 
@@ -179,7 +179,7 @@ class Calculator extends Component {
 
             this.state.piles.push(num,this.state.result);
 
-        } else {
+        } else if(num || this.state.displayResult && this.state.isOperator){
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) * parseInt(this.state.piles[this.state.piles.length-4]);
 
             this.setState((prevState) => ({
@@ -211,7 +211,7 @@ class Calculator extends Component {
 
             this.state.piles.push(num,this.state.result);
 
-        } else {
+        } else if(num || this.state.displayResult && this.state.isOperator){
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) - parseInt(this.state.piles[this.state.piles.length-4]);
 
             this.setState((prevState) => ({
@@ -243,7 +243,7 @@ class Calculator extends Component {
 
             this.state.piles.push(num,this.state.result);
 
-        } else {
+        } else if(num || this.state.displayResult && this.state.isOperator){
             this.state.result += parseInt(this.state.piles[this.state.piles.length-1]) / parseInt(this.state.piles[this.state.piles.length-4]);
 
             this.setState((prevState) => ({
